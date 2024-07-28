@@ -14,7 +14,8 @@ public class Health : MonoBehaviour
     [SerializeField]private GameObject gameOverScreen;
     private PlayerController playerController;
     
-    // Start is called before the first frame update
+    // The functionality for modifying the player's health is abstracted, allowing anyone to simply call the function
+    // and provide the damage int to update the health components without knowing what needs to be updated.
     void Start()
     {
         slider = GetComponent<Slider>();
@@ -23,15 +24,6 @@ public class Health : MonoBehaviour
         slider.maxValue = maxHP;
         currentHP = maxHP;
         AlterHealth(0);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            AlterHealth(1);
-        }
     }
 
     public void AlterHealth(int damage)

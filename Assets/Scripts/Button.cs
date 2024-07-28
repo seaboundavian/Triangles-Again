@@ -2,42 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class Button : MonoBehaviour
 {
-    [SerializeField]private UnityEngine.UI.Button button;
-    [SerializeField] private GameObject spawnManager;
+    //All UI buttons inherit variables from this parent class. AssignButton() is "morphed" for each button.
+    [SerializeField]protected UnityEngine.UI.Button button;
+    [SerializeField] protected GameObject spawnManager;
     private TextMeshProUGUI scoreText;
-    [SerializeField] private GameObject healthUi;
-    private PlayerController playerController;
+    [SerializeField] protected GameObject healthUi;
+    protected PlayerController playerController;
     // Start is called before the first frame update
-    void Awake()
+    
+    protected virtual void AssignButton()
     {
-        playerController = GameObject.Find("Player").GetComponent<PlayerController>();
         button = GetComponent<UnityEngine.UI.Button>();
-        if (CompareTag("Respawn"))
-        {
-            button.onClick.AddListener(BackToMenu);
-        }
-        else
-        {
-            button.onClick.AddListener(StartGame);    
-        }
-        
-    }
-
-    void StartGame()
-    {
-        playerController.isActive = true;
-        spawnManager.gameObject.SetActive(true);
-        healthUi.gameObject.SetActive(true);
-        GameObject.Find("Start Screen").SetActive(false);
-    }
-
-    void BackToMenu()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        Debug.Log("This button is generic and does nothing.");
     }
 }

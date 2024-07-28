@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
+    //Encapsulation of enemy specific variables and functions.
     private float speed = 10.0f;
     private float xOutOfRange = 25.0f;
     private float yOutOfRange = 15.0f;
@@ -16,7 +17,7 @@ public class EnemyController : MonoBehaviour
         Spawn();
     }
 
-    // Update is called once per frame
+    // Most of the code that needs updating is abstracted. checkOutOfRange contains most of the code.
     void Update()
     {
         if (playerController.isActive)
@@ -29,11 +30,6 @@ public class EnemyController : MonoBehaviour
         {
             Destroy(gameObject);
         }
-    }
-    
-    private float RandomRotation()
-    {
-        return Random.Range(0, 360);
     }
 
     private void checkOutOfRange()
@@ -51,8 +47,6 @@ public class EnemyController : MonoBehaviour
     private void Spawn()
     {
         int direction = Random.Range(1, 5);
-        Debug.Log("Direction set to" + direction);
-
         switch (direction)
         {
             case 1:
